@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IOTProject.CoreProject.Core\IOTProject.CoreProject.Core.csproj" />
+    <ProjectReference Include="..\IOTProject.IOTProject.Domain\IOTProject.IOTProject.Domain.csproj" />
+    <ProjectReference Include="..\IOTProject.IOTProject.Infra.Ioc\IOTProject.IOTProject.Infra.Ioc.csproj" />
+  </ItemGroup>
+
+</Project>
