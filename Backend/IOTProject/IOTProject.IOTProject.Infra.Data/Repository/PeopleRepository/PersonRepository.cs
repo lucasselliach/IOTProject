@@ -38,12 +38,36 @@ namespace IOTProject.IOTProject.Infra.Data.Repository.PeopleRepository
 
         public void Put(Person person)
         {
-            throw new NotImplementedException();
+            var client = new MongoClient(IotMongoDb.Connection);
+            var database = client.GetDatabase(IotMongoDb.DataBase);
+            
+            var filter = Builders<Person>.Filter.Eq("Id", person.Id);
+
+            var update = Builders<Person>.Update.Set("Name", person.Name)
+                                                .Set("Email", person.Email)
+                                                .Set("BirthDate", person.BirthDate)
+                                                .Set("IsFitness", person.IsFitness)
+                                                .Set("IsSmoker", person.IsSmoker)
+                                                .Set("HasCardiovascularDisease", person.HasCardiovascularDisease)
+                                                .Set("HasHighCholesterol", person.HasHighCholesterol)
+                                                .Set("HasDiabetes", person.HasDiabetes)
+                                                .Set("AlterDate", person.AlterDate)
+                                                .Set("DeleteDate", person.DeleteDate)
+                                                .Set("Active", person.Active);
+
+            var collection = database.GetCollection<Person>("People");
+            collection.UpdateOne(filter, update);
         }
 
         public void Delete(Person person)
         {
-            throw new NotImplementedException();
+            var client = new MongoClient(IotMongoDb.Connection);
+            var database = client.GetDatabase(IotMongoDb.DataBase);
+
+            var filter = Builders<Person>.Filter.Eq("Id", person.Id);
+
+            var collection = database.GetCollection<Person>("People");
+            collection.DeleteOne(filter);
         }
     }
 }

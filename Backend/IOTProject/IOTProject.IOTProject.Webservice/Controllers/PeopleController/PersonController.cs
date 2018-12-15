@@ -77,6 +77,52 @@ namespace IOTProject.IOTProject.Webservice.Controllers.PeopleController
             }
         }
 
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("Person/Edit/PersonNameEmailBirthDate")]
+        public IActionResult EditPersonNameEmailBirthDate([FromBody]PersonNameEmailBirthDateEditViewModel personNameEmailBirthDateEditViewModel, Guid personId)
+        {
+            try
+            {
+                if (personNameEmailBirthDateEditViewModel == null) return CreateResponse(HttpStatusCode.BadRequest, "Object 'personNameEmailBirthDateEditViewModel' is empty.");
+
+                _personService.ChangePersonNameEmailBirthDate(personNameEmailBirthDateEditViewModel.Name,
+                                                              personNameEmailBirthDateEditViewModel.Email,
+                                                              personNameEmailBirthDateEditViewModel.BirthDate,
+                                                              personId);
+
+                return CreateResponse(HttpStatusCode.OK, "Person has been edited.");
+            }
+            catch (Exception err)
+            {
+                return CreateResponse(HttpStatusCode.BadRequest, err.Message);
+            }
+        }
+
+        [HttpPut]
+        [AllowAnonymous]
+        [Route("Person/Edit/PersonHealthInformation")]
+        public IActionResult EditChangePersonHealthInformation([FromBody]PersonHealthInformation personHealthInformation, Guid personId)
+        {
+            try
+            {
+                if (personHealthInformation == null) return CreateResponse(HttpStatusCode.BadRequest, "Object 'personHealthInformation' is empty.");
+
+                _personService.ChangePersonHealthInformation(personHealthInformation.IsFitness,
+                                                             personHealthInformation.IsSmoker,
+                                                             personHealthInformation.HasCardiovascularDisease,
+                                                             personHealthInformation.HasHighCholesterol,
+                                                             personHealthInformation.HasDiabetes,
+                                                             personId);
+
+                return CreateResponse(HttpStatusCode.OK, "Person has been edited.");
+            }
+            catch (Exception err)
+            {
+                return CreateResponse(HttpStatusCode.BadRequest, err.Message);
+            }
+        }
+
         [HttpDelete]
         [AllowAnonymous]
         [Route("Person/Delete")]
